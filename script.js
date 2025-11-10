@@ -1,4 +1,3 @@
-// Single clean script for the Expense Tracker app
 
 // Redirect to login if not logged in
 if (!localStorage.getItem('loggedIn')) {
@@ -20,6 +19,26 @@ if (logoutBtn) {
 	logoutBtn.addEventListener('click', () => {
 		localStorage.removeItem('loggedIn');
 		window.location.href = 'login.html';
+	});
+}
+
+// Theme toggle: apply saved theme and wire up toggle button
+function applyTheme(theme){
+	if(theme === 'dark') document.documentElement.classList.add('dark-theme');
+	else document.documentElement.classList.remove('dark-theme');
+}
+
+const savedTheme = localStorage.getItem('theme') || 'light';
+applyTheme(savedTheme);
+const themeBtn = document.getElementById('theme-toggle');
+if(themeBtn){
+	themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+	themeBtn.addEventListener('click', () => {
+		const current = document.documentElement.classList.contains('dark-theme') ? 'dark' : 'light';
+		const next = current === 'dark' ? 'light' : 'dark';
+		applyTheme(next);
+		localStorage.setItem('theme', next);
+		themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
 	});
 }
 
