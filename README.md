@@ -2,6 +2,8 @@
 
 Small static expense tracker built with HTML/CSS/JS. Stores a single user and transactions in browser `localStorage`.
 
+Live demo: (https://expensetracker20059.netlify.app/)
+
 ## Quick start (macOS / zsh)
 
 1. Open a terminal and change into the project folder:
@@ -73,15 +75,3 @@ console.log('user:', localStorage.getItem('user'));
 console.log('loggedIn:', localStorage.getItem('loggedIn'));
 console.log('transactions:', localStorage.getItem('transactions'));
 ```
-
-and paste output here.
-
-## Next steps 
-
-- Add proper user sessions / multiple users (requires backend).
-- Replace localStorage credential storage with a secure backend and hashed passwords.
-- Improve accessibility (labels, ARIA roles) and add tests.
-
----
-
-
