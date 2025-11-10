@@ -76,7 +76,7 @@ console.log('transactions:', localStorage.getItem('transactions'));
 
 and paste output here.
 
-## Next steps (suggestions)
+## Next steps 
 
 - Add proper user sessions / multiple users (requires backend).
 - Replace localStorage credential storage with a secure backend and hashed passwords.
@@ -84,4 +84,4 @@ and paste output here.
 
 ---
 
-If you want, I can also add a `start.sh` script that launches the server and opens the browser automatically, or add a screenshot and the sample console helper as a script file. Which would you like?
+
