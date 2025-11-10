@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login - Expense Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+<h2>Login</h2>
+<form id="login-form">
+<input type="text" id="username" placeholder="Enter username" required />
+<input type="password" id="password" placeholder="Enter password"
+required />
+<button type="submit">Login</button>
+<p class="small-text">No account? <a href="#" id="register-link">Register</a></p>
+</form>
+<!-- Inline register box (hidden by default) -->
+<div id="register-box" style="display:none; margin-top:12px;">
+	<h3>Register</h3>
+	<input type="text" id="reg-username" placeholder="Choose username" />
+	<input type="password" id="reg-password" placeholder="Choose password" />
+	<button id="reg-submit">Create account</button>
+	<button id="reg-cancel" style="margin-left:8px;">Cancel</button>
+</div>
+<p id="msg" class="small-text" aria-live="polite"></p>
+</form>
+</div>
+<script>
+const loginForm = document.getElementById('login-form');
+const registerLink = document.getElementById('register-link');
+const msgEl = document.getElementById('msg');
+const registerBox = document.getElementById('register-box');
+const regUsername = document.getElementById('reg-username');
+const regPassword = document.getElementById('reg-password');
+const regSubmit = document.getElementById('reg-submit');
+const regCancel = document.getElementById('reg-cancel');
+
+registerLink.addEventListener('click', (e) => {
+	e.preventDefault();
+	// show inline register box
+	registerBox.style.display = registerBox.style.display === 'none' ? 'block' : 'none';
+});
+
+regCancel.addEventListener('click', (e) => {
+	e.preventDefault();
+	registerBox.style.display = 'none';
+});
+
+regSubmit.addEventListener('click', (e) => {
+	e.preventDefault();
+	const username = regUsername.value.trim();
+	const password = regPassword.value;
+	if (!username || !password) {
+		msgEl.textContent = 'Choose both a username and password.';
+		return;
+	}
+	localStorage.setItem('user', JSON.stringify({ username, password }));
+	msgEl.textContent = 'Account created! Please login.';
+	regUsername.value = '';
+	regPassword.value = '';
+	registerBox.style.display = 'none';
+});
+
+loginForm.addEventListener('submit', (e) => {
+	e.preventDefault();
+	const storedUser = JSON.parse(localStorage.getItem('user'));
+	const username = document.getElementById('username').value.trim();
+	const password = document.getElementById('password').value;
+
+	if (!storedUser) {
+		msgEl.textContent = 'No account found. Click Register to create one.';
+		return;
+	}
+
+	if (username === storedUser.username && password === storedUser.password) {
+		localStorage.setItem('loggedIn', 'true');
+		window.location.href = 'index.html';
+	} else {
+		msgEl.textContent = 'Invalid credentials. Try again.';
+	}
+});
+</script>
+</body>
+</html>
